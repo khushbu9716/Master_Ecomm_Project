@@ -1,8 +1,6 @@
 package com.scaler.productcatalogueecom.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,11 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
-public class Category extends BaseModel{
-    private String  categoryName;
-    private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
+
+@Document(collection = "categories")
+public class Category extends BaseModel {
+    private String categoryName;
 }

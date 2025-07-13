@@ -1,39 +1,32 @@
 package com.scaler.productcatalogueecom.models;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 
 @Getter
 @Setter
 
-@Entity
+
+@Document(collection = "products")
 public class Product extends BaseModel {
-    private  String title;
-    private  String description;
-    private  BigDecimal price;
-//    private  String image;
+    private String title;
+    private String description;
+    private BigDecimal price;
     private Integer stockQuantity;
     private String specs;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    //@JoinColumn specifies the foreign key column name in the product table
+    @DBRef
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductAttribute> attributeList = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImage> productImages = new ArrayList<>();
-//
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductReview> reviews = new ArrayList<>();
-
-
 }
+

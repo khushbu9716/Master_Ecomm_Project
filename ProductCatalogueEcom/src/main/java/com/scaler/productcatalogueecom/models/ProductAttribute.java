@@ -1,21 +1,18 @@
 package com.scaler.productcatalogueecom.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-@Entity
+@Getter
 public class ProductAttribute extends BaseModel {
-    private String keyName;
-    private String value;
+    private String keyName;   // Example: "Processor"
+    private String value;     // Example: "A17 Bionic"
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-
+    // Constructors
+    public ProductAttribute() {}
+    public ProductAttribute(String keyName, String value) {
+        this.keyName = keyName;
+        this.value = value;
+    }
 }

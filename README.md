@@ -1,49 +1,54 @@
 # Product_Catalog
+
 It will be Product service for E-commerce project
 
+We migrated the Product Catalog Service database from **MySQL** (relational) to **MongoDB** (document-based NoSQL) to improve flexibility, performance, and scalability.
 
-Example of product response in json format:
+### **2. Why We Migrated (Motivation)**
 
-{
-  "id": 101,
-  "created": "2024-07-01T10:00:00Z",
-  "lastModifiedAt": "2024-07-10T08:30:00Z",
-  "title": "iPhone 15 Pro",
-  "description": "Flagship Apple phone with improved battery and camera.",
-  "price": 129999.00,
-  "stockQuantity": 10,
-  "specs": "A17 Pro chip, 120Hz OLED, 512GB Storage",
+* **Flexible Schema**: Products can have different specifications, attributes, or images — MongoDB handles this easily without altering table structures.
+* **Faster Development**: No need to manage complex table joins or schema migrations.
+* **Better for Nested Data**: ProductImages and ProductAttributes can be **embedded** inside a product document — no foreign key handling.
+* **Improved Read Performance**: MongoDB reads entire product documents in one query (no joins), which is great for catalog-heavy applications.
+* **Horizontal Scalability**: MongoDB supports sharding and scaling out easily compared to MySQL.
 
-  "category": {
-    "id": 1,
-    "categoryName": "Smartphones",
-    "created": "2024-06-15T12:00:00Z",
-    "lastModifiedAt": "2024-06-20T15:00:00Z"
-  },
+### **3. Key Differences**
 
-  "attributeList": [
-    { "keyName": "Processor", "value": "A17 Pro" },
-    { "keyName": "Storage", "value": "512GB" },
-    { "keyName": "Camera", "value": "48MP Triple" },
-    { "keyName": "Display", "value": "6.1-inch OLED" }
-  ],
 
-  "productImages": [
-    { "imageUrl": "https://cdn.example.com/images/iphone15-front.jpg" },
-    { "imageUrl": "https://cdn.example.com/images/iphone15-back.jpg" }
-  ],
+| Feature            | MySQL (SQL)                    | MongoDB (NoSQL)                  |
+| ------------------ | ------------------------------ | -------------------------------- |
+| Schema             | Fixed (tables, columns)        | Flexible (JSON-like documents)   |
+| Relationships      | Foreign keys, joins            | Embedding, references (`@DBRef`) |
+| Read operations    | Multiple joins for nested data | Single document fetch            |
+| Schema migration   | Requires ALTER TABLE           | No need — structure can evolve  |
+| Product Attributes | Separate table (1:M)           | Embedded in Product document     |
+| Product Images     | Separate table (1:M)           | Embedded in Product document     |
 
-  "reviews": [
-    {
-      "email": "user1@example.com",
-      "comment": "Amazing performance and battery life!",
-      "ratings": 5
-    },
-    {
-      "email": "user2@example.com",
-      "comment": "Great camera but expensive.",
-      "ratings": 4
-    }
-  ]
-}
+### **Benefits We Observed**
 
+* Reduced backend code and fewer SQL queries
+* Easier evolution of product structure (adding new attributes/images)
+* Faster catalog loading due to single document reads
+* Clean mapping between frontend JSON and backend objects
+
+### **When MongoDB is Especially Useful**
+
+* Product Catalogs with varying specs
+* Inventory systems where each product has custom fields
+* Analytics dashboards with fast read requirements
+
+
+### Steps I Followed:
+
+Step 1: Update `pom.xml` – Dependencies
+
+Step 2: Configure `application.properties`
+
+
+## Step 3: Modify Entity Classes
+
+### Changes made:
+
+* Replaced `@Entity` with `@Document` (MongoDB)
+* Replaced `@GeneratedValue` with `@Id` (MongoDB uses ObjectId)
+* Embedded related sub-objects directly into `Product`

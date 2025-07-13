@@ -1,18 +1,20 @@
 package com.scaler.productcatalogueecom.models;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
-
+import org.springframework.data.annotation.Id;
 import java.util.Date;
 
 @Getter
 @Setter
-@MappedSuperclass
 public abstract class BaseModel {
     @Id
-    private Long id;
+    private String id;
+
     private Date created;
     private Date lastModifiedAt;
+
+    // Getters/setters
 }
+
+
