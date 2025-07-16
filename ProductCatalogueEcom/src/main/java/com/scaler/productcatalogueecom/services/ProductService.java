@@ -1,4 +1,10 @@
 package com.scaler.productcatalogueecom.services;
 
-public class ProductService {
+import com.scaler.productcatalogueecom.models.Product;
+
+import java.util.List;
+
+public interface ProductService {
+    Product createProduct(Product product);
+    List<Product> getAllProducts();
 }
