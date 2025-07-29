@@ -11,7 +11,7 @@ public abstract class BaseModel {
     @Id
     private String id;
 
-    private Date created;
+    private Date createdAt;
     private Date lastModifiedAt;
 
     // Getters/setters

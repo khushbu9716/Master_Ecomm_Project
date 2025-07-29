@@ -24,7 +24,8 @@ public class Product extends BaseModel {
 
     @DBRef
     private Category category;
-
+    //1:1category
+//    private List<Category> categoryList = new ArrayList<>();
     private List<ProductAttribute> attributeList = new ArrayList<>();
     private List<ProductImage> productImages = new ArrayList<>();
     private List<ProductReview> reviews = new ArrayList<>();

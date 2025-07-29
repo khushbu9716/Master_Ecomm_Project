@@ -110,7 +110,6 @@ just run deleteByID(id) function in service.
 
 ## Exception Handling
 
-
 I'll guide you through implementing comprehensive exception handling for your product catalog service. We'll cover:
 
 * Custom exceptions
@@ -130,10 +129,7 @@ We will make custom exceptions and make a gobal exceptions Handler But why?
 
 why not we can take RuntimeExceptionhandler and write message instead making custom exceptions?
 
-
 ### **Comparison: `RuntimeException` vs. Custom `ProductNotFoundException`**
-
-
 
 #### **1. `RuntimeException` Approach**
 
@@ -141,7 +137,6 @@ public Product getProduct(String id) {
 return productRepository.findById(id)
 .orElseThrow(() -> new RuntimeException("Product not found: " + id));
 }
-
 
 
 | Aspect                | `RuntimeException`                                    | `ProductNotFoundException`(Custom)                           |
@@ -153,3 +148,20 @@ return productRepository.findById(id)
 | ⚙️ Reusability      | Not reusable or scalable                              | Can reuse in other controllers/services                      |
 | 🛑 API Response       | Usually returns 500 Internal Server Error             | Can return 404 Not Found using`@ControllerAdvice`            |
 | 📂 Best Practice      | ❌ Avoid using for known business errors              | ✅ Always use for expected domain-level errors               |
+
+Custom Exception Implementation steps:
+
+1. Create custom exception class. ProductNotFoundException and extends to Exception
+2. Throw exception in service logic -> .orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
+3. Handle it in ControllerAdvisor
+
+
+## What is a DTO (Data Transfer Object)?
+
+A DTO is a plain Java object that carries data between layers (Controller ⇄ Service ⇄ Repository) without exposing the entity directly.
+It helps you:
+
+* Hide unnecessary fields
+* Prevent circular references
+* Format data as required by the client
+* Apply validation
