@@ -31,8 +31,7 @@ public class GlobalExceptionHandler {
         this.error = error;
     }
 
-    //Handle Validation Error
-
+    //Handle Validation Errors
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Map<String, String>> handleValidationException(
@@ -101,11 +100,8 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> HandleException(Exception ex) {
 //        ErrorResponses errorResponses = new ErrorResponses();
-        return  ResponseEntity.internalServerError().body("An Unexpected error Occured "+ex.getMessage());
+        return  ResponseEntity.internalServerError().body("An Unexpected error Occured "
+                +ex.getMessage());
     }
-
-
-
-
 
 }
