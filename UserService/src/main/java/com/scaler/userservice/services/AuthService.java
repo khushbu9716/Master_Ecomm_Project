@@ -46,12 +46,5 @@ public class AuthService {
         return null;
     }
 
-    private UserDto from(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setEmail(user.getEmail());
-        userDto.setRoles(user.getRoles());
-        userDto.setUserName(user.getUsername());
-        return userDto;
-    }
+
 }
