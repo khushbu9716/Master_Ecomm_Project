@@ -13,5 +13,6 @@ public class UserDto {
     private String userName;
     private String email;
     private List<Role> roles;
+    private String tokenValue; // Optional, if you want to include the token in the user DTO
 
 }

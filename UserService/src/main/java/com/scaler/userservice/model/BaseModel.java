@@ -1,11 +1,10 @@
 package com.scaler.userservice.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -16,8 +15,12 @@ public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @CreationTimestamp
+    @Column(updatable = false)
     private Date createdAt;
     private State state;
+
+    @UpdateTimestamp
     private Date updatedAt;
     private String createdBy;
 

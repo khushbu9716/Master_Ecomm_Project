@@ -14,6 +14,6 @@ public class SignupRequestDto {
     private String username;
     private String email;
     private String password;
-    private Integer phoneNumber;
+    private Long phoneNumber;
 
 }

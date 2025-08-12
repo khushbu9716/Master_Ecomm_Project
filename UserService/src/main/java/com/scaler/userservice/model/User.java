@@ -17,7 +17,7 @@ public class User extends BaseModel{
     private String username;
     private String email;
     private String password;
-    private Integer phoneNumber;
+    private Long phoneNumber;
     @ManyToMany
     private List<Role> roles;
     //Role would be a list-> becs one person can be a TA, Student and Mentor also
