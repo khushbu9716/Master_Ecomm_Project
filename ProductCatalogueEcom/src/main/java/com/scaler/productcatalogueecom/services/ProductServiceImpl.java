@@ -1,5 +1,6 @@
 package com.scaler.productcatalogueecom.services;
 
+import com.scaler.productcatalogueecom.client.commons.AuthCommons;
 import com.scaler.productcatalogueecom.dto.request.CreateProductDto;
 import com.scaler.productcatalogueecom.exceptions.ProductNotFoundException;
 import com.scaler.productcatalogueecom.models.Category;
@@ -19,6 +20,9 @@ public class ProductServiceImpl  implements ProductService {
     private  ModelMapper modelMapper;
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private AuthCommons authCommons;
 
     @Override
     public Product createProduct(CreateProductDto requestDto) {

@@ -1,8 +1,11 @@
 package com.scaler.productcatalogueecom.controllers;
 
+import com.scaler.productcatalogueecom.client.commons.AuthCommons;
+import com.scaler.productcatalogueecom.client.dtos.UserDto;
 import com.scaler.productcatalogueecom.dto.request.CreateProductDto;
 import com.scaler.productcatalogueecom.exceptions.DuplicateProductException;
 import com.scaler.productcatalogueecom.exceptions.InvalidProductDataException;
+import com.scaler.productcatalogueecom.exceptions.UnAuthorizedException;
 import com.scaler.productcatalogueecom.models.Product;
 import com.scaler.productcatalogueecom.repos.ProductRepository;
 import com.scaler.productcatalogueecom.services.ProductService;
@@ -22,6 +25,9 @@ public class ProductController {
     @Autowired
 //    private ProductRepository productRepository;
     private ProductService productService;
+
+    @Autowired
+    private AuthCommons authCommons;
 
     @PostMapping
     public ResponseEntity<Product> createProduct(
@@ -60,9 +66,14 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable String id) {
+    @GetMapping("/{id}/{token}")
+    public ResponseEntity<Product> getProductById(@PathVariable String id,
+                                                  @PathVariable String token) {
         System.out.println("Get Product");
+        UserDto userDto = authCommons.validateUser(token);
+        if (userDto == null) {
+            throw new UnAuthorizedException("Invalid token provided");
+        }
         return ResponseEntity.ok(productService.getProductById(id));
     }
 

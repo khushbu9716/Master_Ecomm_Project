@@ -79,6 +79,12 @@
 			<version>3.1.1</version>
 		</dependency>
 
+		<!--Rest Template Dependency-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!--Rest Template Dependency end -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

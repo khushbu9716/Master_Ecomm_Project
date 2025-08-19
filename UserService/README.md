@@ -91,3 +91,32 @@ Steps:
 # Assignment/Doubts:
 
 Q1: Why constructor injection is recommanded way and not field injection
+
+Q2: When a client send an api put a token in path of api then verify the token and send the response
+
+# Communication Between Two Services
+
+1. create AuthCommon  file , anotate it as component.
+2. then make changes in service file, call the api of UserService
+3. make changes in controller
+
+### Setting CreatedBy default:
+
+1. Using Spring Security AuditorAware (Recommended)
+
+# OAuth2 Impelmentation
+
+1. write dependency in pom.xml
+2. convert yaml file to .properties file
+3. write securityConfig->  all these are present in spring offical site
+4. Make changes in user password, becs if u login it wont work, it requires bcrypt password. if u put bcrypt password inside password string then u will able to pass login section but it will give error.
+5. To resolve error, we need to connect with db
+
+# Implement OAuth2 with DB/JPA( Core Services with JPA )
+
+https://docs.spring.io/spring-authorization-server/reference/guides/how-to-jpa.html
+
+### Steps:
+
+1. Make models and copy all model class from above link.
+2.

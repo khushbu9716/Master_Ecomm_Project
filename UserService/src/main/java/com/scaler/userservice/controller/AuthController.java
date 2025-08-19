@@ -49,6 +49,9 @@ public class AuthController {
     }
 
     private UserDto from(User user) {
+        if(user == null) {
+            return null;
+        }
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setEmail(user.getEmail());
